@@ -62,9 +62,43 @@ const SeatCircle = memo(function SeatCircle({
 
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent) => {
-            if ((e.key === 'Enter' || e.key === ' ') && isInteractive) {
-                e.preventDefault();
-                onSeatClick(seat, sectionLabel, rowIndex);
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (isInteractive) {
+                    e.preventDefault();
+                    onSeatClick(seat, sectionLabel, rowIndex);
+                }
+                return;
+            }
+
+            // Arrow key navigation
+            let nextCol = seat.col;
+            let nextRow = rowIndex;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    nextCol -= 1;
+                    break;
+                case 'ArrowRight':
+                    nextCol += 1;
+                    break;
+                case 'ArrowUp':
+                    nextRow -= 1;
+                    break;
+                case 'ArrowDown':
+                    nextRow += 1;
+                    break;
+                default:
+                    return;
+            }
+
+            e.preventDefault();
+
+            const sectionId = sectionLabel.split(' ').pop();
+            const colStr = nextCol.toString().padStart(2, '0');
+            const nextSeatId = `${sectionId}-${nextRow}-${colStr}`;
+            const nextSeatEl = document.querySelector(`[data-seat-id="${nextSeatId}"]`) as SVGCircleElement | null;
+            if (nextSeatEl) {
+                nextSeatEl.focus();
             }
         },
         [seat, sectionLabel, rowIndex, isInteractive, onSeatClick]
