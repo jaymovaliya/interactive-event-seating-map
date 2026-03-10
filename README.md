@@ -28,12 +28,7 @@ Install dependencies and start the dev server:
 pnpm install
 pnpm dev
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### Building for Production
-
-```bash
-pnpm build && pnpm preview
+Open http://localhost:5173 in your browser.
 ```
 
 ## Tech Stack
