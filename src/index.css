@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  html,
+  body,
+  #root {
+    @apply h-full font-sans antialiased;
+  }
+}
+
+@layer components {
+
+  /* ===== SVG Seat Circles ===== */
+  .seat-circle {
+    @apply transition-all duration-150 ease-in-out;
+  }
+
+  .seat-interactive {
+    @apply cursor-pointer;
+  }
+
+  .seat-interactive:hover {
+    filter: brightness(1.2);
+    r: 6.5;
+  }
+
+  .seat-interactive:focus-visible {
+    @apply outline-none;
+    stroke: theme('colors.indigo.500');
+    stroke-width: 2;
+    r: 7;
+  }
+
+  .seat-disabled {
+    @apply cursor-default opacity-50;
+  }
+
+  .section-label {
+    @apply pointer-events-none select-none;
+  }
+
+
+
+  /* ===== Loading Spinner ===== */
+  .loading-spinner {
+    @apply w-10 h-10 rounded-full border-[3px] border-slate-200 dark:border-slate-700 border-t-indigo-500 animate-spin-slow;
+  }
+}
